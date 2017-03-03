@@ -26,5 +26,5 @@ NAME : <input type="text" id="name" size="40" class="in" />
 		});
 	});
 	
-	
+// git 사용중	
 </script>
