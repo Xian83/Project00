@@ -26,5 +26,5 @@ NAME : <input type="text" id="name" size="40" class="in" />
 		});
 	});
 	
-// git 사용중	
+// git 사용중 우와왕아앙 에러 테스트 	
 </script>
