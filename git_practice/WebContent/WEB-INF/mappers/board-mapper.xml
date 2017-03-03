@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.board">
+	<select id="count" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) as cnt from freeboard
+	</select>
+	<select id="getList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from(select rownum as r, result1.* from (select * from FREEBOARD order by num desc) result1) where r between #{start} and #{end}
+	</select>
+	<select id="getByNum" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+		select * from freeboard where num=#{num}
+	</select>
+	<insert id="add" parameterType="java.util.HashMap">
+		insert into FREEBOARD values(freeboard_seq.nextval, #{writer}, #{category}, #{title}, #{content}, sysdate, 0, 0)
+	</insert>
+	<update id="updateView" parameterType="java.lang.Integer">
+		update freeboard set viewcount=viewcount+1 where num=#{num}
+	</update>
+	<update id="updateHit" parameterType="java.lang.Integer">
+		update freeboard set viewcount=viewcount-1, hitcount=hitcount+1 where num=#{num}
+	</update>
+	<update id="updateData" parameterType="java.util.HashMap">
+		update freeboard set category=#{category}, title=#{title}, content=#{content} where num=#{num}
+	</update>
+</mapper>
